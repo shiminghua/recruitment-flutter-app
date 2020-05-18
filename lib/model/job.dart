@@ -27,3 +27,13 @@ class Job {
 
   Map<String, dynamic> toJson() => _$JobToJson(this);
 }
+
+/**
+{ title: '测试1',
+  salary: '5000',
+  company: '百度',
+  info: '来得及法律大富科技按劳动法吉安市领导',
+  head: 'https://seopic.699pic.com/photo/40011/0709.jpg_wh1200.jpg',
+  publish: 'adaaaaaa',
+}
+*/

@@ -25,9 +25,14 @@ class JobPage extends StatefulWidget {
 
 class _JobPageState extends State<JobPage> with AutomaticKeepAliveClientMixin {
   Future<List<Job>> _fetchJobList() async {
+    print(333333);
     List<Job> jobList = List<Job>();
+    print(4444);
+    print(jobList);
     Response<Map<String, dynamic>> response =
-        await HttpUtil().get('/api/jobs/list/1');
+        await HttpUtil().get('/jobs/list/1/');
+    print(11111);
+    print(response);
     if (response.statusCode == 200) {
       Map<String, dynamic> result = response.data;
       for (dynamic data in result['data']['jobs']) {
@@ -53,22 +58,24 @@ class _JobPageState extends State<JobPage> with AutomaticKeepAliveClientMixin {
         ),
       ),
       body: new Center(
-          child: new FutureBuilder(
-        future: _fetchJobList(),
-        builder: (context, AsyncSnapshot snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-            case ConnectionState.waiting:
-              return CircularProgressIndicator();
-            default:
-              if (snapshot.error) {
-                return new Text('Error: ${snapshot.error}');
-              } else {
-                return _createListView(context, snapshot);
-              }
-          }
-        },
-      )),
+        child: new FutureBuilder(
+          future: _fetchJobList(),
+          builder: (context, AsyncSnapshot snapshot) {
+            print(222222);
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.waiting:
+                return CircularProgressIndicator();
+              default:
+                if (snapshot.error) {
+                  return new Text('Error: ${snapshot.error}');
+                } else {
+                  return _createListView(context, snapshot);
+                }
+            }
+          },
+        ),
+      ),
     );
   }
 
